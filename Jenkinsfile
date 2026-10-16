@@ -11,11 +11,11 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh '''
-                    python3 -m venv .venv
-                    . .venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
+                bat '''
+                    py -3 -m venv .venv
+                    call .venv\\Scripts\\activate.bat
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
                     python -m pytest Tests/ -v
                 '''
             }
@@ -23,9 +23,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh '''
-                    docker build -t devops-status-dashboard:1.0 .
-                '''
+                bat 'docker build -t devops-status-dashboard:1.0 .'
             }
         }
     }
