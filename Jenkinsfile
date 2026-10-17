@@ -9,10 +9,16 @@ pipeline {
             }
         }
 
+        stage('Check Python') {
+            steps {
+                bat '"C:\\Users\\Teja\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" --version'
+            }
+        }
+
         stage('Test') {
             steps {
                 bat '''
-                    py -3 -m venv .venv
+                    "C:\\Users\\Teja\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m venv .venv
                     call .venv\\Scripts\\activate.bat
                     python -m pip install --upgrade pip
                     python -m pip install -r requirements.txt
